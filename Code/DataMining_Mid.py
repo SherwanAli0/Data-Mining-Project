@@ -7,7 +7,7 @@ from sklearn.metrics import confusion_matrix, accuracy_score
 
 np.random.seed(42)
 
-data = pd.read_csv('/Users/ipekucar/Desktop/diabetes.csv')
+data = pd.read_csv('/Users/sherwan_ali/Desktop/diabetes.csv')
 
 print("Classification on the Original Dataset")
 print("Original Dataset")
