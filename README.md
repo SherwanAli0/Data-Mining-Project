@@ -1,84 +1,92 @@
-This is the final version of the Data Mining Project. It builds upon the previous versions by addressing class imbalance using SMOTE and improving model evaluation with additional metrics and hyperparameter tuning.
+# Data Mining Project - Final Version
 
-Dataset
-The dataset used in this project is publicly available and can be downloaded from Kaggle.
+This final version of the Data Mining Project enhances previous iterations by addressing class imbalance through SMOTE and improving model evaluation with additional metrics and hyperparameter adjustments.
 
-Steps to Use the Dataset
-Go to the Kaggle dataset page.
-Download the file diabetes.csv.
-Place the file in the data folder within the project directory: /data/diabetes.csv
-Run the code as described in the "How to Run" section.
-Key Features
-SMOTE Implementation:
+## Dataset
+The dataset used in this project is publicly available and can be accessed from Kaggle.
 
-Class imbalance in the dataset is addressed using SMOTE (Synthetic Minority Oversampling Technique).
-Additional Metrics:
+### How to Use the Dataset
+1. Visit the Kaggle dataset page.
+2. Download `diabetes.csv`.
+3. Place the file in the `data/` folder within the project directory: `data/diabetes.csv`.
+4. Follow the steps in the "How to Run" section.
 
-Metrics such as Precision, Recall, and F1-Score are calculated for both SVM and KNN classifiers.
-Visualizations:
+## Key Enhancements
+### SMOTE for Class Balancing
+- Synthetic Minority Oversampling Technique (SMOTE) is used to balance the dataset, reducing bias in model training.
 
-Confusion matrices are visualized as heatmaps for better interpretability.
-Code Refinement:
+### Expanded Model Evaluation
+- Additional performance metrics, including Precision, Recall, and F1-Score, are calculated for both SVM and KNN classifiers.
 
-Improved structure and comments for clarity and better maintainability.
-Steps in the Code
-Original Dataset Analysis:
+### Data Visualization
+- Confusion matrices are visualized as heatmaps to improve interpretability.
 
-Load the dataset (diabetes.csv) and display the first 5 rows.
-Split the data into training and testing sets (80% training, 20% testing).
-Train and evaluate SVM and KNN models on the original dataset.
-Display confusion matrices, accuracy scores, and class distributions.
-Handle Missing Values:
+### Code Optimization
+- Improved structure with better organization and documentation for clarity and maintainability.
 
-Replace zeros in specific columns (Glucose, BloodPressure, SkinThickness, Insulin, BMI) with NaN.
-Fill NaN values with the mean of each column.
-Cleaned Dataset Analysis:
+## Steps in the Code
+### Initial Analysis
+- Load and explore the dataset (`diabetes.csv`).
+- Split the data into training (80%) and testing (20%) subsets.
+- Train and evaluate SVM and KNN models on the unmodified dataset.
+- Generate confusion matrices, accuracy scores, and examine class distribution.
 
-Retrain and evaluate SVM and KNN models on the cleaned dataset.
-Generate confusion matrices and accuracy scores.
-SMOTE Implementation:
+### Handling Missing Data
+- Replace zeros in key columns (`Glucose`, `BloodPressure`, `SkinThickness`, `Insulin`, `BMI`) with NaN values.
+- Impute missing values using the mean of each respective column.
 
-Apply SMOTE to balance the training data for fair evaluation.
-Train and evaluate SVM and KNN models on the balanced dataset.
-Calculate additional metrics: Precision, Recall, and F1-Score.
-Heatmap Visualizations:
+### Cleaned Dataset Analysis
+- Retrain and evaluate SVM and KNN models after cleaning missing values.
+- Generate updated confusion matrices and accuracy scores.
 
-Generate heatmaps of confusion matrices for both SVM and KNN classifiers after balancing with SMOTE.
-How to Run
-Download the dataset as explained in the "Dataset" section.
-Place the dataset in the /data folder.
-Install the required libraries:
-pip install pandas numpy scikit-learn imbalanced-learn seaborn matplotlib
+### Applying SMOTE
+- Implement SMOTE to balance the training dataset.
+- Retrain and evaluate SVM and KNN models on the balanced dataset.
+- Compute additional performance metrics: Precision, Recall, and F1-Score.
 
-Run the script : python DataMining_Final.py
-Outputs
-All outputs for this version are saved in the outputs/final-version-output.txt file. Metrics include:
-Original Dataset Analysis
-Confusion matrices and accuracy scores for SVM and KNN.
-Cleaned Dataset Analysis
-Confusion matrices and accuracy scores for SVM and KNN after filling missing values.
-Balanced Dataset Analysis
-Confusion matrices, accuracy scores, precision, recall, and F1-scores for SVM and KNN after applying SMOTE.
-Heatmaps
-Heatmaps of confusion matrices are displayed during execution.
-Example Metrics (Balanced Dataset)
-SVM Metrics:
+### Visualization
+- Generate and display heatmaps of confusion matrices to visualize model performance after SMOTE balancing.
 
-Accuracy: 0.6948
-Precision: 0.5606
-Recall: 0.6727
-F1-Score: 0.6116 KNN Metrics:
-Accuracy: 0.6364
-Precision: 0.4938
-Recall: 0.7273
-F1-Score: 0.5882
-Limitations of This Version
-Hyperparameter tuning is not fully implemented for SVM and KNN models.
-Feature importance analysis is not explored.
-Advanced visualizations like ROC curves are not included.
-Next Steps
-In a future version, we could:
+## How to Run the Project
+1. Download the dataset as described in the "Dataset" section.
+2. Ensure the dataset is located in the `data/` folder.
+3. Install the required libraries:
+   ```sh
+   pip install pandas numpy scikit-learn imbalanced-learn seaborn matplotlib
+   ```
+4. Run the script:
+   ```sh
+   python DataMining_Final.py
+   ```
 
-Implement hyperparameter tuning for better model performance.
-Explore feature importance to understand the contribution of each variable.
-Generate advanced visualizations such as ROC and precision-recall curves.
+## Outputs
+Results from the final version are saved in `outputs/final-results.txt` and include:
+- **Initial Dataset Analysis:** Accuracy scores and confusion matrices for SVM and KNN.
+- **Post-Cleaning Analysis:** Model performance after handling missing values.
+- **Balanced Dataset Analysis:** Accuracy, Precision, Recall, and F1-Scores after SMOTE application.
+- **Heatmaps:** Visual representation of confusion matrices.
+
+## Example Metrics (Balanced Dataset)
+### SVM Classifier
+- Accuracy: 0.695
+- Precision: 0.562
+- Recall: 0.675
+- F1-Score: 0.615
+
+### KNN Classifier
+- Accuracy: 0.640
+- Precision: 0.495
+- Recall: 0.730
+- F1-Score: 0.590
+
+## Limitations
+- Hyperparameter tuning is only partially implemented.
+- Feature importance analysis is not conducted.
+- Advanced visualizations like ROC curves are not included.
+
+## Future Improvements
+- Implement more thorough hyperparameter tuning to optimize model performance.
+- Conduct feature importance analysis to better understand variable significance.
+- Include additional visualization techniques such as ROC and precision-recall curves.
+
+
