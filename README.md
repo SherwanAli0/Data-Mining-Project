@@ -1,92 +1,71 @@
-# Data Mining Project - Final Version
+# Diabetes Prediction using SVM and KNN
 
-This final version of the Data Mining Project enhances previous iterations by addressing class imbalance through SMOTE and improving model evaluation with additional metrics and hyperparameter adjustments.
+A classification project for the **COME 401/1 Data Mining** course. The goal is to predict whether a patient has diabetes based on medical attributes using Support Vector Machine (SVM) and K-Nearest Neighbors (KNN) classifiers.
+
+## Overview
+
+This project walks through a complete machine learning pipeline:
+1. **Exploratory analysis** of the Pima Indians Diabetes dataset
+2. **Data cleaning** — replacing invalid zero values with column means
+3. **Feature scaling** using StandardScaler to normalize the data
+4. **Class balancing** using SMOTE to handle the imbalanced dataset
+5. **Model evaluation** with accuracy, precision, recall, and F1-score
 
 ## Dataset
-The dataset used in this project is publicly available and can be accessed from Kaggle.
 
-### How to Use the Dataset
-1. Visit the Kaggle dataset page.
-2. Download `diabetes.csv`.
-3. Place the file in the `data/` folder within the project directory: `data/diabetes.csv`.
-4. Follow the steps in the "How to Run" section.
+The [Pima Indians Diabetes Database](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) from Kaggle contains 768 patient records with 8 medical features (glucose level, blood pressure, BMI, etc.) and a binary outcome indicating diabetes diagnosis.
 
-## Key Enhancements
-### SMOTE for Class Balancing
-- Synthetic Minority Oversampling Technique (SMOTE) is used to balance the dataset, reducing bias in model training.
+The dataset is included in the `DataSet/` folder.
 
-### Expanded Model Evaluation
-- Additional performance metrics, including Precision, Recall, and F1-Score, are calculated for both SVM and KNN classifiers.
+## Results
 
-### Data Visualization
-- Confusion matrices are visualized as heatmaps to improve interpretability.
+| Model | Stage | Accuracy |
+|-------|-------|----------|
+| SVM | Original | 73.38% |
+| SVM | Cleaned + Scaled | **75.32%** |
+| SVM | After SMOTE | 73.38% |
+| KNN | Original | 69.48% |
+| KNN | Cleaned + Scaled | **74.68%** |
+| KNN | After SMOTE | 68.18% |
 
-### Code Optimization
-- Improved structure with better organization and documentation for clarity and maintainability.
+After applying SMOTE, overall accuracy decreased slightly, but **recall for diabetic patients improved significantly** (SVM: 74.5%, KNN: 81.8%), meaning the models catch more actual positive cases — which matters more in a medical context.
 
-## Steps in the Code
-### Initial Analysis
-- Load and explore the dataset (`diabetes.csv`).
-- Split the data into training (80%) and testing (20%) subsets.
-- Train and evaluate SVM and KNN models on the unmodified dataset.
-- Generate confusion matrices, accuracy scores, and examine class distribution.
+## How to Run
 
-### Handling Missing Data
-- Replace zeros in key columns (`Glucose`, `BloodPressure`, `SkinThickness`, `Insulin`, `BMI`) with NaN values.
-- Impute missing values using the mean of each respective column.
+1. Install dependencies:
+```
+pip install pandas numpy scikit-learn imbalanced-learn seaborn matplotlib
+```
 
-### Cleaned Dataset Analysis
-- Retrain and evaluate SVM and KNN models after cleaning missing values.
-- Generate updated confusion matrices and accuracy scores.
+2. Run the script from the project root:
+```
+python Code/DataMining_Final.py
+```
 
-### Applying SMOTE
-- Implement SMOTE to balance the training dataset.
-- Retrain and evaluate SVM and KNN models on the balanced dataset.
-- Compute additional performance metrics: Precision, Recall, and F1-Score.
+## Project Structure
+```
+Data-Mining-Project/
+    Code/
+        DataMining_Final.py    # main script
+    DataSet/
+        diabetes.csv           # dataset
+    Output/
+        results.txt            # model evaluation results
+    LICENSE
+    README.md
+```
 
-### Visualization
-- Generate and display heatmaps of confusion matrices to visualize model performance after SMOTE balancing.
+## Key Takeaways
+- Feature scaling is essential for distance-based models like SVM and KNN
+- SMOTE improves recall for the minority class at the cost of some overall accuracy
+- Evaluating models with precision, recall, and F1-score gives a better picture than accuracy alone
 
-## How to Run the Project
-1. Download the dataset as described in the "Dataset" section.
-2. Ensure the dataset is located in the `data/` folder.
-3. Install the required libraries:
-   ```sh
-   pip install pandas numpy scikit-learn imbalanced-learn seaborn matplotlib
-   ```
-4. Run the script:
-   ```sh
-   python DataMining_Final.py
-   ```
+## Technologies
+- Python 3
+- scikit-learn (SVM, KNN, StandardScaler)
+- imbalanced-learn (SMOTE)
+- seaborn & matplotlib (visualization)
+- pandas & numpy
 
-## Outputs
-Results from the final version are saved in `outputs/final-results.txt` and include:
-- **Initial Dataset Analysis:** Accuracy scores and confusion matrices for SVM and KNN.
-- **Post-Cleaning Analysis:** Model performance after handling missing values.
-- **Balanced Dataset Analysis:** Accuracy, Precision, Recall, and F1-Scores after SMOTE application.
-- **Heatmaps:** Visual representation of confusion matrices.
-
-## Example Metrics (Balanced Dataset)
-### SVM Classifier
-- Accuracy: 0.695
-- Precision: 0.562
-- Recall: 0.675
-- F1-Score: 0.615
-
-### KNN Classifier
-- Accuracy: 0.640
-- Precision: 0.495
-- Recall: 0.730
-- F1-Score: 0.590
-
-## Limitations
-- Hyperparameter tuning is only partially implemented.
-- Feature importance analysis is not conducted.
-- Advanced visualizations like ROC curves are not included.
-
-## Future Improvements
-- Implement more thorough hyperparameter tuning to optimize model performance.
-- Conduct feature importance analysis to better understand variable significance.
-- Include additional visualization techniques such as ROC and precision-recall curves.
-
-
+## License
+[MIT](LICENSE)
