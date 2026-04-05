@@ -1,6 +1,6 @@
 # Diabetes Prediction using SVM and KNN
 
-A classification project for the **COME 401/1 Data Mining** course. The goal is to predict whether a patient has diabetes based on medical attributes using Support Vector Machine (SVM) and K-Nearest Neighbors (KNN) classifiers.
+A classification project . The goal is to predict whether a patient has diabetes based on medical attributes using Support Vector Machine (SVM) and K-Nearest Neighbors (KNN) classifiers.
 
 ## Overview
 
