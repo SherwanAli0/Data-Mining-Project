@@ -8,11 +8,18 @@ from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, r
 from imblearn.over_sampling import SMOTE
 import seaborn as sns
 import matplotlib.pyplot as plt
+import os
+from preprocessing import INVALID_ZERO_COLUMNS, mark_invalid_zeros, impute_with_train_means
 
 np.random.seed(42)
 
-# load the dataset using relative path
-data = pd.read_csv('DataSet/diabetes.csv')
+# paths are relative to the project root, so the script works from any directory
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+output_dir = os.path.join(project_root, 'Output')
+os.makedirs(output_dir, exist_ok=True)
+
+# load the dataset
+data = pd.read_csv(os.path.join(project_root, 'DataSet', 'diabetes.csv'))
 
 print("=" * 50)
 print("STEP 1: Original Dataset")
@@ -29,7 +36,7 @@ print()
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 
-# split into train and test
+# split into train and test (one fixed split, reused for every stage below)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # scale the features - this is important for SVM and KNN because they use distances
@@ -69,29 +76,29 @@ print("STEP 2: Handling Missing Values")
 print("=" * 50)
 
 # in this dataset, 0 values in these columns are actually missing data
-columns_with_zeros = ["Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI"]
+columns_with_zeros = INVALID_ZERO_COLUMNS
 
 print("Number of 0 values in each column:")
 for col in columns_with_zeros:
     print(f"  {col}: {(data[col] == 0).sum()}")
 print()
 
-# replace 0s with NaN
-data[columns_with_zeros] = data[columns_with_zeros].replace(0, np.nan)
+# replace 0s with NaN (a fixed rule), then fill NaN with column means.
+# The means are learned from the training rows only and reused for the test rows,
+# so no test information leaks into the cleaning step.
+X_train_marked = mark_invalid_zeros(X_train)
+X_test_marked = mark_invalid_zeros(X_test)
+X_train_f, X_test_f, train_means = impute_with_train_means(X_train_marked, X_test_marked)
+y_train_f, y_test_f = y_train, y_test
 
-# fill NaN with column means
-data_filled = data.copy()
-data_filled[columns_with_zeros] = data_filled[columns_with_zeros].fillna(data_filled[columns_with_zeros].mean())
-
-print("After replacing 0s with column means:")
-print(data_filled.head())
+print("Training-set column means used to fill the missing values:")
+print(train_means.round(4).to_string())
+print()
+print("After replacing 0s with training column means (training rows):")
+print(X_train_f.head())
 print()
 
-# split again with cleaned data
-X_filled = data_filled.iloc[:, :-1]
-y_filled = data_filled.iloc[:, -1]
-
-X_train_f, X_test_f, y_train_f, y_test_f = train_test_split(X_filled, y_filled, test_size=0.2, random_state=42)
+# note: the cleaned stage uses exactly the same train/test rows as the original stage
 
 # scale the cleaned data
 scaler2 = StandardScaler()
@@ -192,7 +199,7 @@ axes[1].set_xlabel("Predicted")
 axes[1].set_ylabel("Actual")
 
 plt.tight_layout()
-plt.savefig("Output/confusion_matrices.png")
+plt.savefig(os.path.join(output_dir, "confusion_matrices.png"))
 plt.show()
 
 print("Heatmaps saved to Output/confusion_matrices.png")
