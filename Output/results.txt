@@ -3,15 +3,15 @@ Data Mining Project - Final Results
 
 Dataset: Pima Indians Diabetes (768 samples, 8 features)
 Models: SVM, KNN
-Test Size: 20%
+Test Size: 20% (154 test rows, random_state=42; same rows in every step)
 
 Step 1: Original Dataset (with Feature Scaling)
 ------------------------------------------------
 SVM Accuracy: 0.7338
 KNN Accuracy: 0.6948
 
-Step 2: After Cleaning Missing Values (with Feature Scaling)
-------------------------------------------------------------
+Step 2: After Cleaning Missing Values (training-set means, with Feature Scaling)
+--------------------------------------------------------------------------------
 SVM Accuracy: 0.7532
 KNN Accuracy: 0.7468
 
