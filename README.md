@@ -6,7 +6,7 @@ A classification project. The goal is to predict whether a patient has diabetes 
 
 This project walks through a complete machine learning pipeline:
 1. **Exploratory analysis** of the Pima Indians Diabetes dataset
-2. **Data cleaning** — replacing invalid zero values with column means (the means are learned from the training rows only)
+2. **Data cleaning** - replacing invalid zero values with column means (the means are learned from the training rows only)
 3. **Feature scaling** using StandardScaler to normalize the data
 4. **Class balancing** using SMOTE to handle the imbalanced dataset
 5. **Model evaluation** with accuracy, precision, recall, and F1-score
